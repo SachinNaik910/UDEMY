@@ -1,0 +1,211 @@
+vim:
+vi--->visual
+m---->improved
+
+Section 3:Lecture 8 
+         NAVIGATION
+1)
+        ^
+        |
+<-H  J  K  L->
+     |
+	 v
+2)ctrl + f -> PgDn
+  ctrl + b -> PgUp
+  
+  w -> jump one word forward.
+  W -> jump one word forward even skip special characters.
+  b -> jump one word backward.
+  B -> jump one word backward even skip special characters.
+  0 -> home.
+  ^ -> first word of that line.
+  $ -> last word of that line.
+  
+  line no g g -> jumps to that line & only g g  first line.
+  line no G   -> jumps to that line & only G  last line .
+  ctrl g      ->  file name and line no
+  
+  :N -> jump to line N
+  :$ -> end line of the file.
+
+Section 3:Lecture 11 
+         DELETING
+		 
+  x -> delete character
+  X -> backspace
+ METHOD of DELETE
+  Nd*->delete N *
+  * are w , b , h , j , k , l.
+  d0 -> delete line left side of cursor right for <- d$
+  Ndd-> delete N lines down from current line.
+  
+NOTE: '.' is used to run prevous command.
+
+Section 3:Lecture 14
+        HELP
+ :help command -> to get info of that command 	Eg:help dd
+ ctrl + ] -> tags <- ctrl + T
+ 
+ :help incompletecommand -------------> just tab to get options like make
+NOTE:for better UI use   :set wildmenu
+     Next :command + tab + (<- and -> keys)
+	 
+ :help ctrl+g ->will show what is it meant for ,here it is :f[ile]
+NOTE:
+Any thing in bracket[] in help documentation are optional
+If one continueously called help they can move
+  backward/previous help: ctrl + o
+  forward/next      help: ctrl + i  
+  
+Section 4:Lecture 17
+     CUT,COPY/YANK,PASTE
+  cut and paste
+  Ndd -> cut N line and put in default/buffer register
+  p   -> paste it to next line
+  P   -> paste it to current line  
+  
+  copy
+  Ny* -> copy N * ,where * can be w,b,h,j,k,l,o ,$ etc.
+  Nyy -> complete N line
+  p/P ->p paste to next line and P from current line.
+  
+NOTE:u -> undo
+     ctrl + r -> redo
+
+Section 4:Lecture 18
+     REGISTER
+ Name register  ->""
+ Numbered register ->"0 , "1 , "2 ,...., "9
+NOTE:
+ "0 -> stores only yank/copy data i,e yy.
+ "" -> stores last copy/cut data.
+ "1 - "9 -> store cut data like stack new data enters and previous data moves next till "9 later gets deleted.
+ 
+ Paste:
+ "* + p/P -> paste the data in *(" ,0-9) register.
+ 
+ Black hole register:"_ -> this is used to copy/cut where register will not change
+ Named register a-z     -> total 26 register both for yy and dd    +  append A-Z in place of a-z
+ "* + p/P               -> paste *(a-z) register
+  
+Section 6:Lecture 21
+    INSERT,CHANGE,REPLACE,JOINING
+ INSERT
+  N+i+text+escape -> prints text N times in same line.
+  N+o+text+escape -> prints text N times in different line.
+  
+ CHANGE
+  cc + text -> replace entire line.
+  
+ CHANGE CAPITAL
+  g~*/gu*/gU* -> change its case to other where * is w,b,0,$ etc.
+  
+ JOINING
+  NJ -> join N lines with space
+  
+Section 6:Lecture 22
+  SEARCH,FIND,REPLACE
+  :set is  -> incsearch i,e highlights while typing :set nois  -> to disable
+  :set hls -> gets highlighted in yellow            :set nohls -> to disable
+  :/keyword -> forward search
+  :?keyword -> reverse search
+  n -> next char found
+  N -> previous char found.
+  
+  f + char -> forward search in the line<- F +char (reverse)   // : is used to move forward and , to move backword.
+  
+NOTE:We can check whether a command is set or not:set is?
+
+Section 6:Lecture 23
+  SUBSTITUTION
+  :s/old/new/g -> replace in current line.
+  :%s/old/new/g -> replace in entire file.
+  
+  REPLACE
+  r + char -> replace current char with new one.
+  
+Section 7:Lecture 28
+  TEXT OBJECTS
+  #a* -> # are like d,c etc and * w,W,0,$ etc.. a is all including space.
+  #i* -> # are like d,c etc and * w,W,0,$ etc.. i will not include space.
+  NOTE:* = s -> sentence
+           p ->	paragraph	
+           ] -> []
+           b -> ()
+           B -> {}		   
+  
+Section 7:Lecture 31
+  MACRO
+  This is used to store set of commands
+   q* -> starts recording the data we type in reg *(a-z). <- q to stop .
+   q* -> * in capital to append.
+   N@* -> paste the recorded data from reg *. to N line    OR     :range normal @*   Eg:5,8 normal @*
+   
+Section 8:Lecture 32
+   Visual Mode 2
+   v -> character mode
+   V -> line mode
+   ctrl V -> bock mode/vertical mode
+   
+   shift + > -> shift text/tab (^I)
+   g+v -> reselect previous selected one.
+NOTE:
+    :set line -> will make tab to look ^I and end of line $.
+	:set shftwidth=4 -> will make shift+v to shift by four char.
+	
+	center:
+	:'<,'>center=N -> will move the selected text to centeror by N char (default = 80)
+	:'<,'>left=N
+	:'<,'>right=N
+	
+Section 10 :Lecture 42
+    BUFFERS
+	:e filename -> open filename from current file vim session
+	vim btusb* -> open one file in vim and all other will be in buffer.
+	:buffers/ls -> lists of files in buffer. Her %a shows current and # pevious file in use.
+	:bf-bl -> navigate to first or last file. bN -> to open Nth file
+	:bf-bp -> navigate to next and previous file.
+	:bn -> nth buffer.
+	:b!* -> we cannot jump without saving but here we can ...:ls shows %a + ->unsaved
+	:badd filename -> adds filename in current buffer list.
+	:bd N -> deletes Nth buffer file.
+	:%bd -> delete all buffer.
+	:bufdo %s/old/new/g -> chnage in all file.
+	
+Section 10 :Lecture 45	
+	:sp filename -> horizontal split
+	:vs filename -> vertical split
+	:only -> shows current file only.
+	
+Section 11 :Lecture 46
+   VIM GUI
+   sudo apt-get install vim-gtk
+   gvim filename-> graphical way of vim
+   :set clipboard=unamed -> by this we can copy data from outside to vim.
+   
+   "+/"* -> registers who can have data stored from chrome.
+NOTE:It has scroll up and down
+   
+   
+   :set -> shows commands set
+   :set name? -> check name is set or not.
+   :colorscheme name -> put name color in background.
+   
+   .vimrc file is the file will always be sourced in all file:will be present in home directory
+   " comment in vimrc
+   :set ignorecase -> will ignore case in search
+   :set smartcase -> puts back to case sensitive
+   ******************************************************************************************************************************************
+   NAVIGATION
+   DELETE YANK
+   HELP
+   REGISTER
+   Ni*Esc ,cc , NJ, gU/u*. n-N next search , ctrl+r-u
+   TEXT OBJECTS->#a*,#i* *->s,p,*.  #->d/c
+   MACRO q*->record in reg * ...N@*
+   VISUAL :'<.'>
+   BUFFERS
+   SP VSP ONLY
+   GVIM CLIPBOARD, * + 
+12)IGNORECASE SMAETCASE
+   
